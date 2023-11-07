@@ -21,7 +21,7 @@ def ros_init():
         ]
         node = JointStateSubscriber()
         # expected
-        assert node.is_arm_stowed(arm_stowed_values) is True
+        assert node.is_arm_in_stowed_position(arm_stowed_values) is True
 
     def test_arm_stowed_evaluation_when_arm_is_not_stowed_should_return_false(self):
         
@@ -31,7 +31,7 @@ def ros_init():
         arm_values = [0, 1, 2, 3, 4, 5, 6]
         node = JointStateSubscriber()
         # expected
-        assert node.is_arm_stowed(arm_values) is False
+        assert node.is_arm_in_stowed_position(arm_values) is False
 
 
     def test_gripper_evaluation_when_gripper_is_close_to_closed_position_should_return_true(self):
