@@ -1,0 +1,12 @@
+We should have unit tests verifying that different joint values produce the correct results:
+
+ When the arm's joint values are at the stowed position, the arm's stowed evaluation should report that correctly
+ When the arm's joint values are not at the stowed position, the arm's stowed evaluation should report that correctly
+ When the gripper joint is close to its closed position the gripper evaluation should return a closed gripper
+ When the gripper joint is close to its open position the gripper evaluation should return a opened gripper
+ 
+ 
+ 
+ ** Add integration test for status publisher
+ 
+** finish Issue 6 Please make sure that your function names are as descriptive as possible. Think about what the function actually does and what function name would represent this.
