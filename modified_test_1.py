@@ -40,12 +40,12 @@ def ros_init():
         gripper_position = -0.02
         node = JointStateSubscriber()
         # expected
-        assert node.is_gripper_values(gripper_position) is True
+        assert node.is_position_within_gripper_range(gripper_position) is True
 
     def test_gripper_evaluation_when_gripper_is_close_to_open_position_should_return_false():
     #given
         gripper_position = 0.02
         node = JointStateSubscriber()
         # expected
-        assert node.is_gripper_values(gripper_position) is False
+        assert node.is_position_within_gripper_range(gripper_position) is False
 
