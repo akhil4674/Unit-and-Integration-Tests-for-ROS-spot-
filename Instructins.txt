@@ -6,7 +6,15 @@ We should have unit tests verifying that different joint values produce the corr
  When the gripper joint is close to its open position the gripper evaluation should return a opened gripper
  
  
- 
+THERE SHOULD BE A CHNAGE IN THE MAIN SPOT ARM STATUS FILE IN ORDER TO IMPLEMENT +-0.2 SPACE FOR GRIPPER VALUES 
+
+
+RENAMING 
+
+is_arm_in_stowed_position. -----> ARM_IS_IN_STOWED_POSITION
+is_position_within_gripper_range.  ------> POSITION_OF_GRIPPER_IS_WITHIN_CLOSED_RANGE/OPEN_RANGE 
+
+
  ** Add integration test for status publisher
  
 ** finish Issue 6 Please make sure that your function names are as descriptive as possible. Think about what the function actually does and what function name would represent this.
