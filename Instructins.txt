@@ -10,3 +10,5 @@ We should have unit tests verifying that different joint values produce the corr
  ** Add integration test for status publisher
  
 ** finish Issue 6 Please make sure that your function names are as descriptive as possible. Think about what the function actually does and what function name would represent this.
+
+THIS ISSUE HAS NOT BEEN PASSED BY FELIX
