@@ -46,7 +46,8 @@ class JointStateSubscriber(Node):
         return all(joint_stowed)
 
     def is_position_within_gripper_range(self, gripper_position):
-        return (gripper_position < -0.03)
+       # return (gripper_position < -0.03)
+        return -0.04 <= gripper_position <= -0.02
 
     def joint_state_callback(self, msg):
         self.get_logger().debug(f'Received joint state: {msg}')
