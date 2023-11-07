@@ -11,8 +11,8 @@ THERE SHOULD BE A CHNAGE IN THE MAIN SPOT ARM STATUS FILE IN ORDER TO IMPLEMENT 
 
 RENAMING 
 
-is_arm_in_stowed_position. -----> ARM_IS_IN_STOWED_POSITION
-is_position_within_gripper_range.  ------> POSITION_OF_GRIPPER_IS_WITHIN_CLOSED_RANGE/OPEN_RANGE 
+is_arm_in_stowed_position. -----> checking_if_the_position_of_arm_is_stowed_or_not
+is_position_within_gripper_range.  ------> checking_if_the_gripper_is_open_or_closed_position
 
 
  ** Add integration test for status publisher
