@@ -40,11 +40,9 @@ class JointStateSubscriber(Node):
     def checking_if_the_position_of_arm_is_stowed_or_not(self, arm_values)
             abs(real - desired) < 0.1
             for real, desired in zip(arm_values, self.arm_stowed_values)
-        
+             return all(joint_stowed)
 
-        return all(joint_stowed)
-
-    def checking_if_the_gripper_is_open_or_closed_position(self, gripper_position):
+    def checking_if_the_gripper_is_open_or_closed_position(self, gripper_position)
        # return (gripper_position < -0.03)
         return -0.04 <= gripper_position <= -0.02
 
