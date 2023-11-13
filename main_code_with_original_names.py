@@ -6,16 +6,16 @@ from std_msgs.msg import Bool
 
 class JointStateSubscriber(Node):
     def __init__(self):
-        super().__init__('arm_gripper_status')
+        super().__init__("arm_gripper_status")
 
         self.arm_joints = [
-            'arm_sh0',
-            'arm_sh1',
-            'arm_hr0',
-            'arm_el0',
-            'arm_el1',
-            'arm_wr0',
-            'arm_wr1',
+            "arm_sh0",
+            "arm_sh1",
+            "arm_hr0",
+            "arm_el0",
+            "arm_el1",
+            "arm_wr0",
+            "arm_wr1",
         ]
         self.arm_stowed_values = [
             -0.0001456737518310547,
@@ -28,40 +28,43 @@ class JointStateSubscriber(Node):
         ]
 
         self.joint_state_subscription = self.create_subscription(
-            JointState, 'joint_states', self.joint_state_callback, 1
+            JointState, "joint_states", self.joint_state_callback, 1
         )
-        self.arm_stowed_publisher = self.create_publisher(Bool, 'arm_stowed', 1)
-        self.gripper_open_publisher = self.create_publisher(Bool, 'gripper_open', 1)
+        self.arm_stowed_publisher = self.create_publisher(Bool, "arm_stowed", 1)
+        self.gripper_open_publisher = self.create_publisher(Bool, "gripper_open", 1)
 
     def get_joint_position(self, joint_name, joint_state_msg):
         index = joint_state_msg.name.index(joint_name)
         return joint_state_msg.position[index]
 
-    def checking_if_the_position_of_arm_is_stowed_or_not(self, arm_values)
+    def is_arm_in_stowed_position(self, arm_values):
+        joint_stowed = [
             abs(real - desired) < 0.1
             for real, desired in zip(arm_values, self.arm_stowed_values)
-             return all(joint_stowed)
+        ]
 
-    def checking_if_the_gripper_is_open_or_closed_position(self, gripper_position)
-       # return (gripper_position < -0.03)
+        return all(joint_stowed)
+
+    def checking_gripper_position(self, gripper_position):
         return -0.04 <= gripper_position <= -0.02
 
     def joint_state_callback(self, msg):
-        self.get_logger().debug(f'Received joint state: {msg}')
+        self.get_logger().debug(f"Received joint state: {msg}")
 
         try:
-            gripper_position = self.get_joint_position('arm_f1x', msg)
+            gripper_position = self.get_joint_position("arm_f1x", msg)
         except ValueError:
             self.get_logger().debug(
-                'This joint state does not contain the right joints - ignoring.'
+                "This joint state does not contain the right joints - ignoring."
             )
 
         gripper_open_msg = Bool()
-        gripper_open_msg.data = self.checking_if_the_gripper_is_open_or_closed_position(gripper_position)
+        gripper_open_msg.data = self.checking_gripper_position(gripper_position)
         self.gripper_open_publisher.publish(gripper_open_msg)
 
         arm_values = [self.get_joint_position(joint, msg) for joint in self.arm_joints]
-        arm_stowed = self.checking_if_the_position_of_arm_is_stowed_or_not(arm_values)
+
+        arm_stowed = self.is_arm_in_stowed_position(arm_values)
         arm_stowed_msg = Bool()
         arm_stowed_msg.data = arm_stowed
         self.arm_stowed_publisher.publish(arm_stowed_msg)
@@ -74,5 +77,5 @@ def main(args=None):
     rclpy.shutdown()
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()
